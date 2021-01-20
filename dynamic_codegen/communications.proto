@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+option go_package = "proto/pb/communicationproto";
+option java_multiple_files = true;
+
+package com.sarvika.clowre.protogen.communication;
+
+import "google/protobuf/empty.proto";
+
+message SendEmailRequest {
+
+  message Attachment {
+    string type = 1;
+    string url = 2;
+    string name = 3;
+  }
+
+  string fromAddress = 1;
+  repeated string toAddresses = 2;
+  repeated string ccAddresses = 3;
+  repeated string bccAddresses = 4;
+
+  string subject = 5;
+  string body = 6;
+  repeated Attachment attachments = 7;
+
+  map<string, string> headers = 8;
+  string tenantId = 9;
+
+}
+
+service EmailIntegration {
+  rpc sendEmail(SendEmailRequest) returns (google.protobuf.Empty);
+}

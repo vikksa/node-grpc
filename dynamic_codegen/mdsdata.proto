@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+
+package com.sarvika.clowre.protogen.generated.mds;
+
+message CountryRequest {
+  string urn = 1;
+}
+
+message StateRequest {
+  string urn = 1;
+  string countryCode = 2;
+}
+
+message CountryData {
+  string countryCode = 1;
+  string countryName = 2;
+}
+
+message CountryResponse {
+  repeated  CountryData countryDataList = 1;
+}
+
+message StateData {
+  string stateCode = 1;
+  string stateName = 2;
+}
+message StateResponse {
+  repeated  StateData stateDataList = 1;
+}
+
+service CountryStateDataService {
+  rpc getCountryData(CountryRequest) returns (CountryResponse);
+  rpc getStateData(StateRequest) returns (StateResponse);
+}
